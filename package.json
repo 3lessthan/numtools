@@ -1,0 +1,26 @@
+{
+  "name": "numtools",
+  "version": "0.1.0",
+  "description": "Toolkit for performing various number operations.",
+  "main": "numtools.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://bitbucket.org/augmentintelligence/numtools.git"
+  },
+  "keywords": [
+    "numbers",
+    "toolkit"
+  ],
+  "author": "Adam Raposo",
+  "license": "MIT",
+  "homepage": "https://bitbucket.org/augmentintelligence/numtools#readme",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.1.1",
+    "rewire": "^4.0.1",
+    "sinon": "^5.0.3"
+  }
+}
