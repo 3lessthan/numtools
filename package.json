@@ -1,7 +1,7 @@
 {
   "name": "numtools",
-  "version": "0.1.0",
-  "description": "Toolkit for performing various number operations.",
+  "version": "0.1.2",
+  "description": "Toolkit for performing various basic number operations.",
   "main": "numtools.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -55,6 +55,31 @@
     return this.isNumbery(value) && (value.toString().indexOf('-') === 0 || value.toString().indexOf('+') === 0);
   };
 
+  /**
+   * Given `a` - will return `-a`.
+   * Given `a`,`b`, will return `a-b`.
+   * @param {number}  a  The number to subtract from or multiply by -1
+   * @param {number} [b] If provided, subtracts from `a`
+   * @returns {number}
+   */
+  exports.minus = function (a, b) {
+    if (this.isInty(a) && b === undefined) return -parseInt(a);
+    else if (this.isFloaty(a) && b === undefined) return -parseFloat(a);
+    else if (this.isNumbery(a) && this.isNumbery(b)) return a - b;
+    else return 0;
+  };
+
+  /**
+   * Given `a`, `b` - will return the absolute difference.
+   * @param {number} a The number to subtract from
+   * @param {number} b The number to subtract
+   * @returns {number}
+   */
+  exports.diff = function (a, b) {
+    if (this.isNumbery(a) && this.isNumbery(b)) return Math.abs(a - b);
+    else return 0;
+  };
+
   //? Using isFloaty(strValue,true) & isFloaty(strValue,false) to differentiate returns is inefficient.
   //? It would require 1 extra call to isFloaty, also it changes output if you dont use strValue
   /**
