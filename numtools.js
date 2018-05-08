@@ -1,9 +1,7 @@
 (function () {
 
   // TODO:
-  //? Add minus() [Eloquent JS Example]
-  //? Add polarShift()
-  //? No need for anti-minus, use abs()
+  //? Add polarShift()?
   //! ^ As noted above, there are some functions that may benefit from this rather than x - (i < 0 ? i * -1) --> x - abs(i)
 
   const numTest = new RegExp(/^[\-\+]?[\d]*\.?[\d]+$/),
