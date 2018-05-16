@@ -2,12 +2,27 @@
 
 Toolkit for performing various basic number operations.
 
+## Usage
+
+Require `numtools` as you would with any other package:
+
+```javascript
+const numtools = require('numtools');
+```
+
+## Testing
+
+Make sure you have the dev-dependencies installed. If you have [`mocha`](https://www.npmjs.com/package/mocha) installed globally, run:
+
+```shell
+mocha
+```
+
 ## Dependencies
 
 ### Project
 
-| Package | GitHub | npm | Docs |
-| :-----: | :----: | und |und |:-: | :--: |
+- None.
 
 ### Development
 

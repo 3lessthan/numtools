@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://bitbucket.org/augmentintelligence/numtools.git"
+    "url": "https://github.com/3lessthan/numtools.git"
   },
   "keywords": [
     "numbers",
@@ -19,7 +19,7 @@
   ],
   "author": "Adam Raposo",
   "license": "MIT",
-  "homepage": "https://bitbucket.org/augmentintelligence/numtools#readme",
+  "homepage": "https://github.com/3lessthan/numtools.git",
   "devDependencies": {
     "chai": "^4.1.2",
     "mocha": "^5.1.1",

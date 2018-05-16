@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>JSDoc: Source: numtools.js</title>
+  <script src="scripts/prettify/prettify.js"></script>
+  <script src="scripts/prettify/lang-css.js"></script><!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  <link href="styles/prettify-tomorrow.css"
+        rel="stylesheet"
+        type="text/css">
+  <link href="styles/jsdoc-default.css"
+        rel="stylesheet"
+        type="text/css">
+</head>
+<body>
+  <div id="main">
+    <h1 class="page-title">Source: numtools.js</h1>
+    <section>
+      <article>
+        <pre class="prettyprint source linenums"><code>(function () {
+
+  // TODO:
+  //? Add polarShift()?
+  //! ^ As noted above, there are some functions that may benefit from this rather than x - (i &lt; 0 ? i * -1) --&gt; x - abs(i)
+
+  const numTest = new RegExp(/^[\-\+]?[\d]*\.?[\d]+$/),
+      floatTest = new RegExp(/(?:^[\-\+]?[\d]*\.{1}[\d]+$)|(?:^[\-\+]?[\d]+\.{1}[\d]*$)/),
+        intTest = new RegExp(/^[\-\+]?[\d]+$/);
+
+  /**
+   * Returns `true` if the value passed is of type 'string' or 'number' and resembles either an integer or float.
+   * @param {number|string} value  The value to test for integer/float resemblance
+   * @returns {boolean}            `true`/`false`
+   */
+  exports.isNumbery = function (value) {
+    return typeof value === 'number' || (typeof value === 'string' &amp;&amp; numTest.test(value));
+  };
+
+  /**
+   * Returns `true` if the value passed is of type 'string' or 'number' and resembles an integer.
+   * @param {number|string} value  The value to test for integer resemblance
+   * @returns {boolean}            `true`/`false`
+   */
+  exports.isInty = function (value) {
+    return (typeof value === 'number' || typeof value === 'string') &amp;&amp; intTest.test(value);
+  };
+
+  /**
+   * Returns `true` if the value passed is of type 'string' or 'number' and resembles a float.
+   *  Optionally, test whether or not it has a leading decimal as well.
+   * @param {number|string} value                  The value to test for float resemblance
+   * @param {boolean}       [withLeadingDecimal]   [Optional] If `true`, tests whether the value has a leading decimal as well.
+   * @returns {boolean}                            `true`/`false`
+   */
+  exports.isFloaty = function (value, withLeadingDecimal) {
+    if ((typeof value === 'number' || typeof value === 'string') &amp;&amp; floatTest.test(value)) {
+      if (withLeadingDecimal === undefined) return true;
+      else {
+        let decimalPos = typeof value === 'number' ? String(value).indexOf('0.') : value.indexOf('.'),
+                offset = (String(value).indexOf('-') === 0 || String(value).indexOf('+') === 0) ? 1 : 0;
+        return (withLeadingDecimal &amp;&amp; decimalPos === offset) || (!withLeadingDecimal &amp;&amp; decimalPos !== offset);
+      }
+    } else return false;
+  };
+
+  /**
+   * Indicates whether the value isNumbery &amp; has a +/- preceding it.
+   * @param {number|string} value The value to test
+   * @returns {boolean}
+   */
+  exports.isSigned = function (value) {
+    return this.isNumbery(value) &amp;&amp; (String(value).indexOf('-') === 0 || String(value).indexOf('+') === 0);
+  };
+
+  /**
+   * Given `a` - will return `-a`.
+   * Given `a`,`b`, will return `a-b`.
+   * @param {number}  a  The number to subtract from or multiply by -1
+   * @param {number} [b] If provided, subtracts from `a`
+   * @returns {number}
+   */
+  exports.minus = function (a, b) {
+    if (this.isInty(a) &amp;&amp; !b) return -parseInt(a);
+    else if (this.isFloaty(a) &amp;&amp; !b) return -parseFloat(a);
+    else if (this.isNumbery(a) &amp;&amp; this.isNumbery(b)) return a - b;
+    else return 0;
+  };
+
+  /**
+   * Given `a`, `b` - will return the absolute difference.
+   * @param {number} a The number to subtract from
+   * @param {number} b The number to subtract
+   * @returns {number}
+   */
+  exports.diff = function (a, b) {
+    if (this.isNumbery(a) &amp;&amp; this.isNumbery(b)) return Math.abs(a - b);
+    else return 0;
+  };
+
+  //? Using isFloaty(strValue,true) &amp; isFloaty(strValue,false) to differentiate returns is inefficient.
+  //? It would require 1 extra call to isFloaty, also it changes output if you dont use strValue
+  /**
+   * Returns the number of digits the value passed possesses. Trailing zeroes are ignored if
+   * the passed value is of type 'number' &amp; numbers with leading decimals count the invisible zero.
+   * @param {number|string} value The value to count digits for
+   * @returns {number}            The number of digits the passed value posesses
+   */
+  exports.countDigits = function (value) {
+    let strValue = String(value),
+          offset = strValue.indexOf('-') === 0 || strValue.indexOf('+') === 0 ? 1 : 0;
+    if (this.isFloaty(value)) return strValue.length - (strValue.indexOf('.') !== 0 + offset ? 1 + offset : 0 + offset);
+    else if (typeof value === 'number' &amp;&amp; this.isInty(value)) return strValue.length;
+    else if (typeof value === 'string' &amp;&amp; this.isNumbery(value)) return value.length;
+  };
+
+  /**
+   * Given a `number`; pad it with zeroes until it has at least `len` digits. If `len` is an array,
+   *  the first value represents the minimum number of digits that should precede the decimal (if there is one),
+   *  and the second, if provided, represents the minimum number of digits that should come after it.
+   *  If `number` is an integer and two digits are passed to `len`, it will be converted to a float with `len[1]` zeroes after the decimal.
+   * @param {number|string} number The number to pad with zeroes.
+   * @param {number[]}      len    [Integer] The minimum amount of digits `number` should have on either side of the decimal.
+   * @returns {string}      Zero-padded `number` as a string with at least `len` digits.
+   */
+  exports.zeroFill = function (number, len) {
+    if (number !== undefined) {
+      if (!len) return number;
+      else if (number !== undefined &amp;&amp; len) {
+          number = String(number);
+        let nIsN = this.isNumbery(number),
+            lIsN = this.isNumbery(len),
+           l1IsN = this.isNumbery(len[0]),
+           l2IsN = this.isNumbery(len[1]),
+            nIsF = this.isFloaty(number),
+            lIsF = this.isFloaty(len),
+           l1IsF = this.isFloaty(len[0]),
+           l2IsF = this.isFloaty(len[1]),
+            lIsV = (lIsN &amp;&amp; !lIsF),
+           l1IsV = (l1IsN &amp;&amp; !l1IsF),
+           l2IsV = (l2IsN &amp;&amp; !l2IsF),
+            nIsS = number.indexOf('-') === 0 || number.indexOf('+') === 0,
+            numi, numd, s = '';
+
+        if (nIsS) {
+          s = number.substr(0, 1);
+          number = number.substr(1);
+        }
+
+        if (nIsF || (l1IsV &amp;&amp; l2IsV &amp;&amp; nIsN)) {
+          let splitNum = number.indexOf('.') !== -1 ? number.split('.') : [number, ''];
+          numi = splitNum[0];
+          numd = splitNum[1];
+        }
+
+        if (lIsV || (l1IsV &amp;&amp; !l2IsV)) {
+          len = parseInt(lIsN ? len : len[0]);
+          if (nIsN &amp;&amp; !nIsF) while (this.countDigits(number) &lt; len) number = '0' + number;
+          else if (nIsF) {
+            while (this.countDigits(numi) &lt; len) numi = '0' + numi;
+            number = numi + '.' + numd;
+          }
+        } else if (l1IsV &amp;&amp; l2IsV &amp;&amp; nIsN) {
+          let li = len[0], ld = len[1];
+          while (this.countDigits(numi) &lt; li) numi = '0' + numi;
+          while (this.countDigits(numd) &lt; ld) numd = numd + '0';
+          number = numi + (ld &gt; 0 ? '.' + numd : '');
+        }
+        return s + number;
+      }
+    }
+  };
+
+}).call(this);</code></pre>
+      </article>
+    </section>
+  </div>
+  <nav>
+    <h2><a href="index.html">Home</a></h2>
+    <h3>Global</h3>
+    <ul>
+      <li>
+        <a href="global.html#countDigits">countDigits</a>
+      </li>
+      <li>
+        <a href="global.html#diff">diff</a>
+      </li>
+      <li>
+        <a href="global.html#isFloaty">isFloaty</a>
+      </li>
+      <li>
+        <a href="global.html#isInty">isInty</a>
+      </li>
+      <li>
+        <a href="global.html#isNumbery">isNumbery</a>
+      </li>
+      <li>
+        <a href="global.html#isSigned">isSigned</a>
+      </li>
+      <li>
+        <a href="global.html#minus">minus</a>
+      </li>
+      <li>
+        <a href="global.html#zeroFill">zeroFill</a>
+      </li>
+    </ul>
+  </nav><br class="clear">
+  <footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed May 16 2018 10:10:02 GMT-0400 (EDT)
+  </footer>
+  <script>
+  prettyPrint();
+  </script> 
+  <script src="scripts/linenumber.js"></script>
+</body>
+</html>

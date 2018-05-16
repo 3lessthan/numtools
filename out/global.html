@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>JSDoc: Global</title>
+  <script src="scripts/prettify/prettify.js"></script>
+  <script src="scripts/prettify/lang-css.js"></script><!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  <link href="styles/prettify-tomorrow.css"
+        rel="stylesheet"
+        type="text/css">
+  <link href="styles/jsdoc-default.css"
+        rel="stylesheet"
+        type="text/css">
+</head>
+<body>
+  <div id="main">
+    <h1 class="page-title">Global</h1>
+    <section>
+      <article>
+        <div class="container-overview">
+          <dl class="details"></dl>
+        </div>
+        <h3 class="subsection-title">Methods</h3>
+        <h4 class="name"
+            id="countDigits">countDigits <span class="signature">(value)</span> <span class="type-signature">&rarr; {number}</span></h4>
+        <div class="description">
+          Returns the number of digits the value passed possesses. Trailing zeroes are ignored if the passed value is of type 'number' & numbers with leading decimals count the invisible zero.
+        </div>
+        <h5>Parameters:</h5>
+        <table class="params">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th class="last">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="name"><code>value</code></td>
+              <td class="type"><span class="param-type">number</span> | <span class="param-type">string</span></td>
+              <td class="description last">The value to count digits for</td>
+            </tr>
+          </tbody>
+        </table>
+        <dl class="details">
+          <dt class="tag-source">Source:</dt>
+          <dd class="tag-source">
+            <ul class="dummy">
+              <li>
+                <a href="numtools.js.html">numtools.js</a>, <a href="numtools.js.html#line89">line 89</a>
+              </li>
+            </ul>
+          </dd>
+        </dl>
+        <h5>Returns:</h5>
+        <div class="param-desc">
+          The number of digits the passed value posesses
+        </div>
+        <dl>
+          <dt>Type</dt>
+          <dd><span class="param-type">number</span></dd>
+        </dl>
+        <h4 class="name"
+            id="diff">diff <span class="signature">(a, b)</span> <span class="type-signature">&rarr; {number}</span></h4>
+        <div class="description">
+          Given `a`, `b` - will return the absolute difference.
+        </div>
+        <h5>Parameters:</h5>
+        <table class="params">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th class="last">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="name"><code>a</code></td>
+              <td class="type"><span class="param-type">number</span></td>
+              <td class="description last">The number to subtract from</td>
+            </tr>
+            <tr>
+              <td class="name"><code>b</code></td>
+              <td class="type"><span class="param-type">number</span></td>
+              <td class="description last">The number to subtract</td>
+            </tr>
+          </tbody>
+        </table>
+        <dl class="details">
+          <dt class="tag-source">Source:</dt>
+          <dd class="tag-source">
+            <ul class="dummy">
+              <li>
+                <a href="numtools.js.html">numtools.js</a>, <a href="numtools.js.html#line76">line 76</a>
+              </li>
+            </ul>
+          </dd>
+        </dl>
+        <h5>Returns:</h5>
+        <dl>
+          <dt>Type</dt>
+          <dd><span class="param-type">number</span></dd>
+        </dl>
+        <h4 class="name"
+            id="isFloaty">isFloaty <span class="signature">(value, withLeadingDecimal <span class="signature-attributes">opt</span>)</span> <span class="type-signature">&rarr; {boolean}</span></h4>
+        <div class="description">
+          Returns `true` if the value passed is of type 'string' or 'number' and resembles a float. Optionally, test whether or not it has a leading decimal as well.
+        </div>
+        <h5>Parameters:</h5>
+        <table class="params">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Attributes</th>
+              <th class="last">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="name"><code>value</code></td>
+              <td class="type"><span class="param-type">number</span> | <span class="param-type">string</span></td>
+              <td class="attributes"></td>
+              <td class="description last">The value to test for float resemblance</td>
+            </tr>
+            <tr>
+              <td class="name"><code>withLeadingDecimal</code></td>
+              <td class="type"><span class="param-type">boolean</span></td>
+              <td class="attributes">&lt;optional&gt;<br></td>
+              <td class="description last">[Optional] If `true`, tests whether the value has a leading decimal as well.</td>
+            </tr>
+          </tbody>
+        </table>
+        <dl class="details">
+          <dt class="tag-source">Source:</dt>
+          <dd class="tag-source">
+            <ul class="dummy">
+              <li>
+                <a href="numtools.js.html">numtools.js</a>, <a href="numtools.js.html#line36">line 36</a>
+              </li>
+            </ul>
+          </dd>
+        </dl>
+        <h5>Returns:</h5>
+        <div class="param-desc">
+          `true`/`false`
+        </div>
+        <dl>
+          <dt>Type</dt>
+          <dd><span class="param-type">boolean</span></dd>
+        </dl>
+        <h4 class="name"
+            id="isInty">isInty <span class="signature">(value)</span> <span class="type-signature">&rarr; {boolean}</span></h4>
+        <div class="description">
+          Returns `true` if the value passed is of type 'string' or 'number' and resembles an integer.
+        </div>
+        <h5>Parameters:</h5>
+        <table class="params">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th class="last">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="name"><code>value</code></td>
+              <td class="type"><span class="param-type">number</span> | <span class="param-type">string</span></td>
+              <td class="description last">The value to test for integer resemblance</td>
+            </tr>
+          </tbody>
+        </table>
+        <dl class="details">
+          <dt class="tag-source">Source:</dt>
+          <dd class="tag-source">
+            <ul class="dummy">
+              <li>
+                <a href="numtools.js.html">numtools.js</a>, <a href="numtools.js.html#line25">line 25</a>
+              </li>
+            </ul>
+          </dd>
+        </dl>
+        <h5>Returns:</h5>
+        <div class="param-desc">
+          `true`/`false`
+        </div>
+        <dl>
+          <dt>Type</dt>
+          <dd><span class="param-type">boolean</span></dd>
+        </dl>
+        <h4 class="name"
+            id="isNumbery">isNumbery <span class="signature">(value)</span> <span class="type-signature">&rarr; {boolean}</span></h4>
+        <div class="description">
+          Returns `true` if the value passed is of type 'string' or 'number' and resembles either an integer or float.
+        </div>
+        <h5>Parameters:</h5>
+        <table class="params">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th class="last">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="name"><code>value</code></td>
+              <td class="type"><span class="param-type">number</span> | <span class="param-type">string</span></td>
+              <td class="description last">The value to test for integer/float resemblance</td>
+            </tr>
+          </tbody>
+        </table>
+        <dl class="details">
+          <dt class="tag-source">Source:</dt>
+          <dd class="tag-source">
+            <ul class="dummy">
+              <li>
+                <a href="numtools.js.html">numtools.js</a>, <a href="numtools.js.html#line16">line 16</a>
+              </li>
+            </ul>
+          </dd>
+        </dl>
+        <h5>Returns:</h5>
+        <div class="param-desc">
+          `true`/`false`
+        </div>
+        <dl>
+          <dt>Type</dt>
+          <dd><span class="param-type">boolean</span></dd>
+        </dl>
+        <h4 class="name"
+            id="isSigned">isSigned <span class="signature">(value)</span> <span class="type-signature">&rarr; {boolean}</span></h4>
+        <div class="description">
+          Indicates whether the value isNumbery & has a +/- preceding it.
+        </div>
+        <h5>Parameters:</h5>
+        <table class="params">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th class="last">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="name"><code>value</code></td>
+              <td class="type"><span class="param-type">number</span> | <span class="param-type">string</span></td>
+              <td class="description last">The value to test</td>
+            </tr>
+          </tbody>
+        </table>
+        <dl class="details">
+          <dt class="tag-source">Source:</dt>
+          <dd class="tag-source">
+            <ul class="dummy">
+              <li>
+                <a href="numtools.js.html">numtools.js</a>, <a href="numtools.js.html#line52">line 52</a>
+              </li>
+            </ul>
+          </dd>
+        </dl>
+        <h5>Returns:</h5>
+        <dl>
+          <dt>Type</dt>
+          <dd><span class="param-type">boolean</span></dd>
+        </dl>
+        <h4 class="name"
+            id="minus">minus <span class="signature">(a, b <span class="signature-attributes">opt</span>)</span> <span class="type-signature">&rarr; {number}</span></h4>
+        <div class="description">
+          Given `a` - will return `-a`. Given `a`,`b`, will return `a-b`.
+        </div>
+        <h5>Parameters:</h5>
+        <table class="params">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Attributes</th>
+              <th class="last">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="name"><code>a</code></td>
+              <td class="type"><span class="param-type">number</span></td>
+              <td class="attributes"></td>
+              <td class="description last">The number to subtract from or multiply by -1</td>
+            </tr>
+            <tr>
+              <td class="name"><code>b</code></td>
+              <td class="type"><span class="param-type">number</span></td>
+              <td class="attributes">&lt;optional&gt;<br></td>
+              <td class="description last">If provided, subtracts from `a`</td>
+            </tr>
+          </tbody>
+        </table>
+        <dl class="details">
+          <dt class="tag-source">Source:</dt>
+          <dd class="tag-source">
+            <ul class="dummy">
+              <li>
+                <a href="numtools.js.html">numtools.js</a>, <a href="numtools.js.html#line63">line 63</a>
+              </li>
+            </ul>
+          </dd>
+        </dl>
+        <h5>Returns:</h5>
+        <dl>
+          <dt>Type</dt>
+          <dd><span class="param-type">number</span></dd>
+        </dl>
+        <h4 class="name"
+            id="zeroFill">zeroFill <span class="signature">(number, len)</span> <span class="type-signature">&rarr; {string}</span></h4>
+        <div class="description">
+          Given a `number`; pad it with zeroes until it has at least `len` digits. If `len` is an array, the first value represents the minimum number of digits that should precede the decimal (if there is one), and the second, if provided,
+          represents the minimum number of digits that should come after it. If `number` is an integer and two digits are passed to `len`, it will be converted to a float with `len[1]` zeroes after the decimal.
+        </div>
+        <h5>Parameters:</h5>
+        <table class="params">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th class="last">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="name"><code>number</code></td>
+              <td class="type"><span class="param-type">number</span> | <span class="param-type">string</span></td>
+              <td class="description last">The number to pad with zeroes.</td>
+            </tr>
+            <tr>
+              <td class="name"><code>len</code></td>
+              <td class="type"><span class="param-type">Array.&lt;number&gt;</span></td>
+              <td class="description last">[Integer] The minimum amount of digits `number` should have on either side of the decimal.</td>
+            </tr>
+          </tbody>
+        </table>
+        <dl class="details">
+          <dt class="tag-source">Source:</dt>
+          <dd class="tag-source">
+            <ul class="dummy">
+              <li>
+                <a href="numtools.js.html">numtools.js</a>, <a href="numtools.js.html#line106">line 106</a>
+              </li>
+            </ul>
+          </dd>
+        </dl>
+        <h5>Returns:</h5>
+        <div class="param-desc">
+          Zero-padded `number` as a string with at least `len` digits.
+        </div>
+        <dl>
+          <dt>Type</dt>
+          <dd><span class="param-type">string</span></dd>
+        </dl>
+      </article>
+    </section>
+  </div>
+  <nav>
+    <h2><a href="index.html">Home</a></h2>
+    <h3>Global</h3>
+    <ul>
+      <li>
+        <a href="global.html#countDigits">countDigits</a>
+      </li>
+      <li>
+        <a href="global.html#diff">diff</a>
+      </li>
+      <li>
+        <a href="global.html#isFloaty">isFloaty</a>
+      </li>
+      <li>
+        <a href="global.html#isInty">isInty</a>
+      </li>
+      <li>
+        <a href="global.html#isNumbery">isNumbery</a>
+      </li>
+      <li>
+        <a href="global.html#isSigned">isSigned</a>
+      </li>
+      <li>
+        <a href="global.html#minus">minus</a>
+      </li>
+      <li>
+        <a href="global.html#zeroFill">zeroFill</a>
+      </li>
+    </ul>
+  </nav><br class="clear">
+  <footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed May 16 2018 10:10:02 GMT-0400 (EDT)
+  </footer>
+  <script>
+  prettyPrint();
+  </script> 
+  <script src="scripts/linenumber.js"></script>
+</body>
+</html>
