@@ -1,6 +1,6 @@
 {
   "name": "numtools",
-  "version": "0.1.4",
+  "version": "1.0.0",
   "description": "Toolkit for performing various basic number operations.",
   "main": "numtools.js",
   "scripts": {
