@@ -37,8 +37,8 @@
     if ((typeof value === 'number' || typeof value === 'string') && floatTest.test(value)) {
       if (withLeadingDecimal === undefined) return true;
       else {
-        let decimalPos = typeof value === 'number' ? value.toString().indexOf('0.') : value.indexOf('.'),
-                offset = (value.toString().indexOf('-') === 0 || value.toString().indexOf('+') === 0) ? 1 : 0;
+        let decimalPos = typeof value === 'number' ? String(value).indexOf('0.') : value.indexOf('.'),
+                offset = (String(value).indexOf('-') === 0 || String(value).indexOf('+') === 0) ? 1 : 0;
         return (withLeadingDecimal && decimalPos === offset) || (!withLeadingDecimal && decimalPos !== offset);
       }
     } else return false;
@@ -50,7 +50,7 @@
    * @returns {boolean}
    */
   exports.isSigned = function (value) {
-    return this.isNumbery(value) && (value.toString().indexOf('-') === 0 || value.toString().indexOf('+') === 0);
+    return this.isNumbery(value) && (String(value).indexOf('-') === 0 || String(value).indexOf('+') === 0);
   };
 
   /**
@@ -61,8 +61,8 @@
    * @returns {number}
    */
   exports.minus = function (a, b) {
-    if (this.isInty(a) && b === undefined) return -parseInt(a);
-    else if (this.isFloaty(a) && b === undefined) return -parseFloat(a);
+    if (this.isInty(a) && !b) return -parseInt(a);
+    else if (this.isFloaty(a) && !b) return -parseFloat(a);
     else if (this.isNumbery(a) && this.isNumbery(b)) return a - b;
     else return 0;
   };
@@ -87,12 +87,11 @@
    * @returns {number}            The number of digits the passed value posesses
    */
   exports.countDigits = function (value) {
-    let strValue = value.toString(),
+    let strValue = String(value),
           offset = strValue.indexOf('-') === 0 || strValue.indexOf('+') === 0 ? 1 : 0;
     if (this.isFloaty(value)) return strValue.length - (strValue.indexOf('.') !== 0 + offset ? 1 + offset : 0 + offset);
     else if (typeof value === 'number' && this.isInty(value)) return strValue.length;
     else if (typeof value === 'string' && this.isNumbery(value)) return value.length;
-    else return null;
   };
 
   /**
@@ -105,48 +104,50 @@
    * @returns {string}      Zero-padded `number` as a string with at least `len` digits.
    */
   exports.zeroFill = function (number, len) {
-    if (number!==undefined && len===undefined) return number;
-    else if (number!==undefined && len!==undefined) {
-      number = number.toString();
-      let nIsN = this.isNumbery(number),
-          lIsN = this.isNumbery(len),
-         l1IsN = this.isNumbery(len[0]),
-         l2IsN = this.isNumbery(len[1]),
-          nIsF = this.isFloaty(number),
-          lIsF = this.isFloaty(len),
-         l1IsF = this.isFloaty(len[0]),
-         l2IsF = this.isFloaty(len[1]),
-          lIsV = (lIsN && !lIsF),
-         l1IsV = (l1IsN && !l1IsF),
-         l2IsV = (l2IsN && !l2IsF),
-          nIsS = number.indexOf('-') === 0 || number.indexOf('+') === 0,
-          numi, numd, s='';
+    if (number !== undefined) {
+      if (!len) return number;
+      else if (number !== undefined && len) {
+          number = String(number);
+        let nIsN = this.isNumbery(number),
+            lIsN = this.isNumbery(len),
+           l1IsN = this.isNumbery(len[0]),
+           l2IsN = this.isNumbery(len[1]),
+            nIsF = this.isFloaty(number),
+            lIsF = this.isFloaty(len),
+           l1IsF = this.isFloaty(len[0]),
+           l2IsF = this.isFloaty(len[1]),
+            lIsV = (lIsN && !lIsF),
+           l1IsV = (l1IsN && !l1IsF),
+           l2IsV = (l2IsN && !l2IsF),
+            nIsS = number.indexOf('-') === 0 || number.indexOf('+') === 0,
+            numi, numd, s = '';
 
-      if (nIsS) {
-        s = number.substr(0,1);
-        number = number.substr(1);
-      }
-
-      if (nIsF || (l1IsV && l2IsV && nIsN)) {
-        let splitNum = number.indexOf('.') !== -1 ? number.split('.') : [number, ''];
-        numi = splitNum[0];
-        numd = splitNum[1];
-      }
-
-      if (lIsV || (l1IsV && !l2IsV)) {
-        len = parseInt(lIsN ? len : len[0]);
-        if (nIsN && !nIsF) while (this.countDigits(number) < len) number = '0' + number;
-        else if (nIsF) {
-          while (this.countDigits(numi) < len) numi = '0' + numi;
-          number = numi + '.' + numd;
+        if (nIsS) {
+          s = number.substr(0, 1);
+          number = number.substr(1);
         }
-      } else if (l1IsV && l2IsV && nIsN) {
-        let li = len[0], ld = len[1];
-        while (this.countDigits(numi) < li) numi = '0' + numi;
-        while (this.countDigits(numd) < ld) numd = numd + '0';
-        number = numi + (ld > 0 ? '.' + numd : '');
+
+        if (nIsF || (l1IsV && l2IsV && nIsN)) {
+          let splitNum = number.indexOf('.') !== -1 ? number.split('.') : [number, ''];
+          numi = splitNum[0];
+          numd = splitNum[1];
+        }
+
+        if (lIsV || (l1IsV && !l2IsV)) {
+          len = parseInt(lIsN ? len : len[0]);
+          if (nIsN && !nIsF) while (this.countDigits(number) < len) number = '0' + number;
+          else if (nIsF) {
+            while (this.countDigits(numi) < len) numi = '0' + numi;
+            number = numi + '.' + numd;
+          }
+        } else if (l1IsV && l2IsV && nIsN) {
+          let li = len[0], ld = len[1];
+          while (this.countDigits(numi) < li) numi = '0' + numi;
+          while (this.countDigits(numd) < ld) numd = numd + '0';
+          number = numi + (ld > 0 ? '.' + numd : '');
+        }
+        return s + number;
       }
-      return s+number;
     }
   };
 
