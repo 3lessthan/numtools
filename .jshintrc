@@ -68,5 +68,8 @@
   "worker": false,
   "wsh": false,
   "yui": false,
-  "globals": {}
+  "globals": {
+    "define": true,
+    "requirejs": true
+  }
 }
